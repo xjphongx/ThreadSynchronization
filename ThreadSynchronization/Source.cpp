@@ -1,8 +1,13 @@
-#include <iostream>
-#include<Windows.h>
+/*
+Jimmy Phong
+Thread Synchronization Program
+This program runs two threads and is controlled by a mutex lock for synchronization.
+*/
 #include <fstream>
-#include <thread>
+#include <iostream>
 #include <mutex>
+#include <thread>
+#include <string>
 
 
 using namespace std; 
@@ -28,7 +33,7 @@ void printNum() {
 	outFile.close();
 	mtx.unlock();
 }
-void printAlpha() {
+void printAlpha() { // same as number but prints out ASCII values for Capital letters
 	mtx.lock();
 	ofstream outFile;
 	outFile.open("synch.txt", std::ios_base::app);
@@ -48,16 +53,13 @@ void printAlpha() {
 }
 int main()
 {
-	ofstream outFile;
-	cout << "Thread Synchronizaton" << endl;
+	cout << "Thread Synchronizaton Program" << endl;
+
 	thread numThread(printNum);
 	thread alphaThread(printAlpha);
 
 	numThread.join();
 	alphaThread.join();
-	
-	
-
 	
 	return 0;
 }
